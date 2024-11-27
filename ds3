@@ -1,0 +1,47 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+vector<int> dynamicArray(int n, vector<string>& queries) {
+    vector<vector<int>> arr(n); 
+    vector<int> answers;        
+    int lastAnswer = 0;         
+    for (auto& query : queries) {
+        int type, x, y;
+        sscanf(query.c_str(), "%d %d %d", &type, &x, &y);
+
+        
+        int idx = (x ^ lastAnswer) % n;
+
+        if (type == 1) {
+            
+            arr[idx].push_back(y);
+        } else if (type == 2) {
+            
+            lastAnswer = arr[idx][y % arr[idx].size()];
+            answers.push_back(lastAnswer);
+        }
+    }
+
+    return answers; 
+}
+
+int main() {
+    int n, q;
+    cin >> n >> q;  
+    
+    cin.ignore(); 
+    vector<string> queries(q);
+    
+    for (int i = 0; i < q; i++) {
+        getline(cin, queries[i]);
+    }
+
+    vector<int> result = dynamicArray(n, queries);
+
+    for (int res : result) {
+        cout << res << endl;
+    }
+
+    return 0;
+}
