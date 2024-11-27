@@ -1,0 +1,81 @@
+#include <iostream>
+#include <vector>
+#include <algorithm> 
+using namespace std;
+
+vector<int> reverseArray(vector<int>& arr) {
+    reverse(arr.begin(), arr.end());  
+    return arr;
+}
+
+int main() {
+    int n;
+    cin >> n;  
+    vector<int> arr(n);  
+
+    for(int i = 0; i < n; i++) {
+        cin >> arr[i];
+    }
+
+    vector<int> reversedArr = reverseArray(arr);
+
+    for(int i = 0; i < n; i++) {
+        cout << reversedArr[i] << " ";
+    }
+
+    return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+222222222
+
+
+
+
+#include <iostream>
+#include <climits> 
+using namespace std;
+
+int hourglassSum(int arr[6][6]) {
+    int maxSum = INT_MIN;  
+    
+    for (int i = 0; i < 4; i++) {  // i can go from 0 to 3
+        for (int j = 0; j < 4; j++) {  // j can go from 0 to 3
+            int top = arr[i][j] + arr[i][j+1] + arr[i][j+2];
+            int middle = arr[i+1][j+1];
+            int bottom = arr[i+2][j] + arr[i+2][j+1] + arr[i+2][j+2];
+            
+            int hourglass = top + middle + bottom;
+            
+            if (hourglass > maxSum) {
+                maxSum = hourglass;
+            }
+        }
+    }
+    
+    return maxSum;
+}
+
+int main() {
+    int arr[6][6];
+    
+    for (int i = 0; i < 6; i++) {
+        for (int j = 0; j < 6; j++) {
+            cin >> arr[i][j];
+        }
+    }
+    
+    cout << hourglassSum(arr) << endl;
+
+    return 0;
+}
+
